@@ -4,36 +4,34 @@ import {addTodo, delTodo} from '../../store/todo/actions';
 import {TState, TTodoList} from '../../store';
 
 // @ts-ignore
-const ButtonsTodo = ({id}) => {
+const ButtonsTodo = ({item}) => {
 
     const dispatch = useDispatch()
 
-
-    const todoList = useSelector<TState, TTodoList[]>((state => state.todoList));
     const selectedList = useSelector<TState, TTodoList[]>((state => state.selectedList));
 
-    const handleAddTodo = (id: number) => {
-        dispatch(addTodo(todoList[id - 1], selectedList));
+    const handleAddTodo = () => {
+        dispatch(addTodo(item));
         console.log('Adddddd')
     };
 
-    const handleDelTodo = (id: number) => {
-        dispatch(delTodo(todoList[id - 1], selectedList));
+    const handleDelTodo = () => {
+        dispatch(delTodo(item));
         console.log('Dellllll')
     };
 
-    const isDisabledButton = (id: number) => {
-        if (selectedList.includes(todoList[id - 1])) {
+    const isDisabledButton = () => {
+        if (selectedList.find((selTodo) => selTodo.id === item.id)) {
             return true
         }
         return false
-    }
+    } //
 
 
     return (
         <>
-            <button onClick={() => handleAddTodo(id)} disabled={isDisabledButton(id)}>Добавить</button>
-            <button onClick={() => handleDelTodo(id)} disabled={!isDisabledButton(id)}>Удалить</button>
+            <button onClick={handleAddTodo} disabled={isDisabledButton()}>Добавить</button>
+            <button onClick={handleDelTodo} disabled={!isDisabledButton()}>Удалить</button>
         </>
     )
 }

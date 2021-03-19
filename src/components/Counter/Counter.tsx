@@ -1,6 +1,6 @@
-import React, { ReactNode } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
-import {TState, TTodoList} from '../../store';
+import {TState} from '../../store';
 
 const Counter = () => {
     const title = useSelector<TState, string>((state) => state.title);

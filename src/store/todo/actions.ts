@@ -1,5 +1,6 @@
-import {ADD_TODO, DEL_TODO, SEND_TODO} from './actionTypes';
+import {ADD_TODO, DEL_TODO, GET_TODO, SEND_TODO} from './actionTypes';
 import {TTodoList} from '../index';
+
 
 export type TAction = {
     type: string,
@@ -18,26 +19,34 @@ export type TAction = {
 //     }]
 // };
 
-export const addTodo = (todo: TTodoList, selectedList: TTodoList[]) => {
+export const addTodo = (todo: TTodoList) => {
 
-    const newArr = [...selectedList, todo]
+    // const newArr = [...selectedList, todo]
 
     return {
         type: ADD_TODO,
-        payload: newArr
+        payload: todo
     }
 
 };
 
-export const delTodo = (todo: TTodoList, selectedList: TTodoList[]) => {
-
-    const newArr = selectedList.filter(selTodo => selTodo.id !== todo.id)
+export const delTodo = (todo: TTodoList) => {
 
     return {
         type: DEL_TODO,
-        payload: newArr
+        payload: todo
     }
 
 };
 
 export const sendTodo = {type: SEND_TODO};
+
+export const getTodo = (todos:TTodoList[]) => {
+    return {
+        type: GET_TODO,
+        payload: todos
+
+    }
+};
+
+
